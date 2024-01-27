@@ -155,9 +155,12 @@ async def encod(event):
                 return await xxx.edit("`THIS FILE ALREADY IN QUEUE`")
             name = event.file.name
             if not name:
-                name = "video_" + dt.now().isoformat("_", "seconds") + ".mp4"
-            QUEUE.update({doc.id: [name, doc]})
-            return await xxx.edit(f"`Added This File in Queue #{len(QUEUE)}`")
+                user = message.from_user.id
+            QUEUE.update({doc.file_id: [name, user]})
+            await save2db()
+            return await xxx.edit(
+                "**Added To Queue ⏰,** \n`Please Wait , Encode will start soon`"
+            )
         WORKING.append(1)
         xxx = await event.reply("`Downloading...`")
         s = dt.now()
