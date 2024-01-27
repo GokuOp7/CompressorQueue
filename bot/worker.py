@@ -156,8 +156,7 @@ async def encod(event):
             name = event.file.name
             if not name:
                 user = message.from_user.id
-            QUEUE.update({doc.file_id: [name, user]})
-            await save2db()
+            QUEUE.update({doc.id: [name, user]})
             return await xxx.edit(
                 "**Added To Queue ⏰,** \n`Please Wait , Encode will start soon`"
             )
